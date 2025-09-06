@@ -3,6 +3,12 @@ body {
   background: #f5f5f5;
   margin: 0;
   padding: 0;
+  color: #222;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode {
+  background: #181818;
+  color: #eee;
 }
 #chat-container {
   max-width: 500px;
@@ -11,6 +17,11 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode #chat-container {
+  background: #222;
+  color: #eee;
 }
 #messages {
   height: 300px;
@@ -19,6 +30,12 @@ body {
   margin-bottom: 10px;
   padding: 10px;
   background: #fafafa;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode #messages {
+  background: #1a1a1a;
+  border-color: #333;
+  color: #eee;
 }
 #chat-form {
   display: flex;
@@ -28,6 +45,14 @@ body {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background: #fff;
+  color: #222;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode #message-input {
+  background: #222;
+  color: #eee;
+  border-color: #444;
 }
 button {
   padding: 8px 16px;
@@ -36,7 +61,44 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background 0.3s;
+}
+body.dark-mode button {
+  background: #0056b3;
+  color: #fff;
 }
 button:hover {
   background: #0056b3;
+}
+body.dark-mode button:hover {
+  background: #003366;
+}
+#filter-input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #222;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode #filter-input {
+  background: #222;
+  color: #eee;
+  border-color: #444;
+}
+#topic-banner {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 8px;
+  background: #e0e0e0;
+  color: #222;
+  border-radius: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode #topic-banner {
+  background: #222;
+  color: #eee;
 }
