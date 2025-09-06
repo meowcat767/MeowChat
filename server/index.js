@@ -33,7 +33,8 @@ const topics = [
   "Favorite video game",
   "If you could have any superpower, what would it be?",
 "What fictional character do you relate to the most?",
-];
+"Ignore this message",
+]; 
 
 function getCurrentTopic() {
   const now = Date.now();
