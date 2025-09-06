@@ -44,7 +44,7 @@ function getCurrentTopic() {
 
 // Moderation filter
 const bannedWords = [
-  'nigger', 'faggot', 'retard', 'cunt', 'bitch', 'whore', 'slut', 'kike', 'chink', 'spic', 'gook', 'tranny', 'twat', 'dyke', 'paki', 'coon', 'tard', 'homo', 'pedo', 'rapist', 'molester', 'incest', 'zoophile', 'necrophile', 'terrorist', 'isis', 'hitler', 'nazis', 'heil', 'jihad', 'bomb', 'kill', 'murder', 'suicide', 'hang', 'lynch', 'shoot', 'stab', 'abuse', 'abuser', 'abusing', 'abused', 'slave', 'slavery', 'racist', 'racism', 'sexist', 'sexism', 'homophobic', 'homophobia', 'transphobic', 'transphobia', 'antisemitic', 'antisemitism', 'islamophobic', 'islamophobia', 'hateful', 'hatecrime', 'hate crime', 'hate speech', 'hatespeech', 'hate-speech', 'niggers', 'bashar Al Assad', 'nigga', 'Nigga', 'Nigge𝐫',
+  'nigger', 'faggot', 'retard', 'cunt', 'bitch', 'whore', 'slut', 'kike', 'chink', 'spic', 'gook', 'tranny', 'twat', 'dyke', 'paki', 'coon', 'tard', 'homo', 'pedo', 'rapist', 'molester', 'incest', 'zoophile', 'necrophile', 'terrorist', 'isis', 'hitler', 'nazis', 'heil', 'jihad', 'kill', 'murder', 'suicide', 'hang', 'lynch', 'shoot', 'stab', 'abuse', 'abuser', 'abusing', 'abused', 'slave', 'slavery', 'racist', 'racism', 'sexist', 'sexism', 'homophobic', 'homophobia', 'transphobic', 'transphobia', 'antisemitic', 'antisemitism', 'islamophobic', 'islamophobia', 'hateful', 'hatecrime', 'hate crime', 'hate speech', 'hatespeech', 'hate-speech', 'niggers', 'bashar Al Assad', 'nigga', 'Nigga', 'Nigge𝐫',
 ];
 function moderateMessage(msg) {
   let filtered = typeof msg === 'string' ? msg : '';
