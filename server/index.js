@@ -26,7 +26,12 @@ const topics = [
   'Worst movie you ever saw',
   'A movie you recommend',
   'Your favorite hobby',
-  'Anything!'
+  'Anything!',
+  'Best anime?',
+  "Liminal Spaces",
+  "Favorite video game",
+  "If you could have any superpower, what would it be?",
+"What fictional character do you relate to the most?",
 ];
 
 function getCurrentTopic() {
@@ -36,12 +41,12 @@ function getCurrentTopic() {
 }
 
 // Moderation filter
-const bannedWords = ['nigger', 'nigga', 'isreal'];
+const bannedWords = ['isreal'];
 function moderateMessage(msg) {
   let filtered = typeof msg === 'string' ? msg : '';
   bannedWords.forEach(word => {
     const regex = new RegExp(word, 'gi');
-    filtered = filtered.replace(regex, '***');
+    filtered = filtered.replace(regex, '[FILTERED]');
   });
   return filtered;
 }
