@@ -74,7 +74,15 @@ function isProtectedNickname(nickname, secret) {
 // Load secret on server start
 loadOwnerSecret();
 
+const bannedIPs = new Set();
+
 io.on('connection', async (socket) => {
+  const ip = socket.handshake.headers['x-forwarded-for']?.split(',')[0]?.trim() || socket.handshake.address;
+  if (bannedIPs.has(ip)) {
+    socket.disconnect(true);
+    return;
+  }
+
   // Send topic immediately on connect
   socket.emit('topic', getCurrentTopic());
 
@@ -121,6 +129,29 @@ io.on('connection', async (socket) => {
       await pool.query('INSERT INTO messages (nickname, content, created_at) VALUES ($1, $2, $3)', [nickname, cleanMsg, timestamp]);
     } catch (err) {
       console.error('DB error:', err);
+    }
+  });
+
+  socket.on('ban ip', ({ ip, nickname, secret }) => {
+    if (protectedNicknames.includes(nickname) && isProtectedNickname(nickname, secret)) {
+      bannedIPs.add(ip);
+      io.emit('chat message', { nickname: 'System', text: `IP ${ip} has been banned.`, timestamp: new Date().toISOString() });
+    }
+  });
+
+  // Only protected nicknames can request IP list
+  socket.on('list ips', ({ nickname, secret }) => {
+    if (protectedNicknames.includes(nickname) && isProtectedNickname(nickname, secret)) {
+      const clients = Array.from(io.sockets.sockets.values());
+      if (clients.length === 0) {
+        socket.emit('chat message', { nickname: 'System', text: 'No users connected.', timestamp: new Date().toISOString() });
+      }
+      clients.forEach(client => {
+        const ip = client.handshake.headers['x-forwarded-for']?.split(',')[0]?.trim() || client.handshake.address;
+        socket.emit('chat message', { nickname: 'System', text: `User IP: ${ip}`, timestamp: new Date().toISOString() });
+      });
+    } else {
+      socket.emit('chat message', { nickname: 'System', text: 'Permission denied.', timestamp: new Date().toISOString() });
     }
   });
 });

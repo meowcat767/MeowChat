@@ -1,7 +1,12 @@
-let nickname = '';
+let nickname = localStorage.getItem('nickname');
 let secret = '';
-while (!nickname) {
+if (!nickname) {
   nickname = prompt('Enter your nickname:');
+  if (nickname === 'Meowcat') {
+    secret = prompt('Enter owner secret:');
+  }
+  localStorage.setItem('nickname', nickname);
+} else {
   if (nickname === 'Meowcat') {
     secret = prompt('Enter owner secret:');
   }
@@ -27,6 +32,14 @@ socket.on('chat message', (msgObj) => {
   renderMessages();
 });
 
+socket.on('chat message', (msgObj) => {
+  // System messages for admin commands
+  if (msgObj.nickname === 'System') {
+    allMessages.push(msgObj);
+    renderMessages();
+  }
+});
+
 function renderMessages() {
   const filter = filterInput.value.toLowerCase();
   messages.innerHTML = '';
@@ -49,6 +62,7 @@ function renderMessages() {
   if (allMessages.length === 0) {
     messages.innerHTML = '<div style="color:gray">No messages yet.</div>';
   }
+  document.getElementById('total-messages').textContent = allMessages.length;
   messages.scrollTop = messages.scrollHeight;
 }
 
@@ -58,6 +72,19 @@ chatForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const msg = messageInput.value;
   if (msg.trim()) {
+    // Ban command (only for protected nicknames)
+    if (nickname === 'Meowcat' && msg.startsWith('/ban ')) {
+      const ipToBan = msg.split(' ')[1];
+      socket.emit('ban ip', { ip: ipToBan, nickname, secret });
+      messageInput.value = '';
+      return;
+    }
+    // List IPs command (only for protected nicknames)
+    if (nickname === 'Meowcat' && msg === '/listips') {
+      socket.emit('list ips', { nickname, secret });
+      messageInput.value = '';
+      return;
+    }
     socket.emit('chat message', { nickname, text: msg, secret });
     messageInput.value = '';
   }
