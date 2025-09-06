@@ -1,0 +1,73 @@
+let nickname = '';
+let secret = '';
+while (!nickname) {
+  nickname = prompt('Enter your nickname:');
+  if (nickname === 'Meowcat') {
+    secret = prompt('Enter owner secret:');
+  }
+}
+
+const socket = io();
+const messages = document.getElementById('messages');
+const chatForm = document.getElementById('chat-form');
+const messageInput = document.getElementById('message-input');
+const filterInput = document.getElementById('filter-input');
+const topicSpan = document.getElementById('topic');
+
+let allMessages = [];
+
+// Receive and display topic
+socket.on('topic', (topic) => {
+  topicSpan.textContent = topic;
+});
+
+// Receive and display messages
+socket.on('chat message', (msgObj) => {
+  allMessages.push(msgObj);
+  renderMessages();
+});
+
+function renderMessages() {
+  const filter = filterInput.value.toLowerCase();
+  messages.innerHTML = '';
+  allMessages.filter(m => m.text && m.text.toLowerCase().includes(filter)).forEach(m => {
+    const div = document.createElement('div');
+    let time = '';
+    if (m.timestamp) {
+      if (typeof m.timestamp === 'string' && m.timestamp.length > 0) {
+        // Try to format ISO string
+        if (!isNaN(Date.parse(m.timestamp))) {
+          time = new Date(m.timestamp).toLocaleString();
+        } else {
+          time = m.timestamp;
+        }
+      }
+    }
+    div.innerHTML = `<strong>${m.nickname}</strong>${time ? ' <span style=\'color:gray\'>[' + time + ']</span>' : ''}: ${m.text}`;
+    messages.appendChild(div);
+  });
+  if (allMessages.length === 0) {
+    messages.innerHTML = '<div style="color:gray">No messages yet.</div>';
+  }
+  messages.scrollTop = messages.scrollHeight;
+}
+
+filterInput.addEventListener('input', renderMessages);
+
+chatForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const msg = messageInput.value;
+  if (msg.trim()) {
+    socket.emit('chat message', { nickname, text: msg, secret });
+    messageInput.value = '';
+  }
+});
+
+// On page load, request topic and recent messages
+socket.emit('get topic');
+socket.emit('get messages');
+
+socket.on('messages', (msgs) => {
+  allMessages = msgs;
+  renderMessages();
+});

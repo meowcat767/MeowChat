@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeowChat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="topic-banner">Topic: <span id="topic">Loading...</span></div>
+  <div id="chat-container">
+    <input type="text" id="filter-input" placeholder="Filter messages..." />
+    <div id="messages"></div>
+    <form id="chat-form">
+      <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off" required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
