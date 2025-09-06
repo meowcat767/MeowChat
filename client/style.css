@@ -106,3 +106,20 @@ body.dark-mode #topic-banner {
 .text-center {
   text-align: center;
 }
+.back-home-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: #4a90e2;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  font-size: 1rem;
+  text-decoration: none;
+  z-index: 1000;
+  transition: background 0.2s;
+}
+.back-home-btn:hover {
+  background: #357abd;
+}

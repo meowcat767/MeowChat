@@ -160,6 +160,36 @@ io.on('connection', async (socket) => {
   });
 });
 
+// API endpoint: Get recent messages
+app.get('/api/messages', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT nickname, content, created_at FROM messages ORDER BY created_at DESC LIMIT 100');
+    const messages = result.rows.map(row => ({
+      nickname: row.nickname || 'Anonymous',
+      text: row.content,
+      timestamp: row.created_at ? new Date(row.created_at).toISOString() : ''
+    }));
+    res.json({ messages });
+  } catch (err) {
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
+// API endpoint: Get current topic
+app.get('/api/topic', (req, res) => {
+  res.json({ topic: getCurrentTopic() });
+});
+
+// API endpoint: Get total message count
+app.get('/api/stats', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT COUNT(*) FROM messages');
+    res.json({ totalMessages: parseInt(result.rows[0].count, 10) });
+  } catch (err) {
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
