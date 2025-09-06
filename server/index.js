@@ -78,8 +78,12 @@ function isProtectedNickname(nickname, secret) {
 loadOwnerSecret();
 
 const bannedIPs = new Set();
+let userCount = 0;
 
 io.on('connection', async (socket) => {
+  userCount++;
+  io.emit('user count', userCount);
+
   const ip = socket.handshake.headers['x-forwarded-for']?.split(',')[0]?.trim() || socket.handshake.address;
   if (bannedIPs.has(ip)) {
     socket.disconnect(true);
@@ -156,6 +160,11 @@ io.on('connection', async (socket) => {
     } else {
       socket.emit('chat message', { nickname: 'System', text: 'Permission denied.', timestamp: new Date().toISOString() });
     }
+  });
+
+  socket.on('disconnect', () => {
+    userCount--;
+    io.emit('user count', userCount);
   });
 });
 

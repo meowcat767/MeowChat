@@ -18,6 +18,7 @@ const chatForm = document.getElementById('chat-form');
 const messageInput = document.getElementById('message-input');
 const filterInput = document.getElementById('filter-input');
 const topicSpan = document.getElementById('topic');
+const userCountSpan = document.getElementById('user-count');
 
 let allMessages = [];
 
@@ -38,6 +39,11 @@ socket.on('chat message', (msgObj) => {
     allMessages.push(msgObj);
     renderMessages();
   }
+});
+
+// Update user count
+socket.on('user count', count => {
+  userCountSpan.textContent = count;
 });
 
 function renderMessages() {
