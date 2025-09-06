@@ -102,3 +102,7 @@ body.dark-mode #topic-banner {
   background: #222;
   color: #eee;
 }
+
+.text-center {
+  text-align: center;
+}

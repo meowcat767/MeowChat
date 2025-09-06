@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 // Sample topics for rotation
 const topics = [
   'Favorite childhood memory',
-  'Best book you ever read',
+  'Best book you have ever read',
   'Dream travel destination',
   'A skill you wish you had',
   'Most inspiring person you know',
