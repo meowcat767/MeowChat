@@ -23,9 +23,10 @@ const topics = [
   'Most inspiring person you know',
   'Funniest thing that happened to you',
   'A food you can’t live without',
-  'What motivates you?',
+  'Worst movie you ever saw',
   'A movie you recommend',
-  'Your favorite hobby'
+  'Your favorite hobby',
+  'Anything!'
 ];
 
 function getCurrentTopic() {
@@ -35,7 +36,7 @@ function getCurrentTopic() {
 }
 
 // Moderation filter
-const bannedWords = ['badword1', 'badword2', 'offensive'];
+const bannedWords = ['nigger', 'nigga', 'isreal'];
 function moderateMessage(msg) {
   let filtered = typeof msg === 'string' ? msg : '';
   bannedWords.forEach(word => {
