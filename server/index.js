@@ -42,11 +42,14 @@ function getCurrentTopic() {
 }
 
 // Moderation filter
-const bannedWords = ['isreal'];
+const bannedWords = [
+  'badword1', 'badword2', 'offensive',
+  'nigger', 'faggot', 'retard', 'cunt', 'bitch', 'whore', 'slut', 'kike', 'chink', 'spic', 'gook', 'tranny', 'twat', 'dyke', 'paki', 'coon', 'tard', 'homo', 'pedo', 'rapist', 'molester', 'incest', 'zoophile', 'necrophile', 'terrorist', 'isis', 'hitler', 'nazis', 'heil', 'jihad', 'bomb', 'kill', 'murder', 'suicide', 'hang', 'lynch', 'shoot', 'stab', 'abuse', 'abuser', 'abusing', 'abused', 'slave', 'slavery', 'racist', 'racism', 'sexist', 'sexism', 'homophobic', 'homophobia', 'transphobic', 'transphobia', 'antisemitic', 'antisemitism', 'islamophobic', 'islamophobia', 'hate', 'hateful', 'hatecrime', 'hate crime', 'hate speech', 'hatespeech', 'hate-speech'
+];
 function moderateMessage(msg) {
   let filtered = typeof msg === 'string' ? msg : '';
   bannedWords.forEach(word => {
-    const regex = new RegExp(word, 'gi');
+    const regex = new RegExp(`\\b${word}\\b`, 'gi');
     filtered = filtered.replace(regex, '[FILTERED]');
   });
   return filtered;
