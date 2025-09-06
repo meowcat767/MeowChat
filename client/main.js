@@ -3,12 +3,12 @@ let secret = '';
 if (!nickname) {
   nickname = prompt('Enter your nickname:');
   if (nickname === 'Meowcat') {
-    secret = prompt('Enter owner secret:');
+    secret = prompt('Enter user secret:');
   }
   localStorage.setItem('nickname', nickname);
 } else {
   if (nickname === 'Meowcat') {
-    secret = prompt('Enter owner secret:');
+    secret = prompt('Enter user secret:');
   }
 }
 
