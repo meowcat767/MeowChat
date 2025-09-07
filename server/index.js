@@ -17,23 +17,11 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 // Sample topics for rotation
 const topics = [
-  'Favorite childhood memory',
-  'Best book you have ever read',
-  'Dream travel destination',
-  'A skill you wish you had',
-  'Most inspiring person you know',
-  'Funniest thing that happened to you',
-  'A food you can’t live without',
-  'Worst movie you ever saw',
-  'A movie you recommend',
-  'Your favorite hobby',
-  'Anything!',
-  'Best anime?',
-  "Liminal Spaces",
-  "Favorite video game",
-  "If you could have any superpower, what would it be?",
-"What fictional character do you relate to the most?",
-"Ignore this message",
+  "Don't try to bypass the filter. Playwright will get you anyway.",
+  "bash: npm: command not found",
+  "[FILTERED]",
+  "Fun fact: There are over 100 words in the filter database.",
+  "THIS SOFTWARE MUST NOT BE SOLD ALONE OR PART OF A BUNDLE. IF YOU PAID FOR THIS SOFTWARE OR RECIVED IT AS PART OF A BUNDLE FOLLOWING PAYMENT, YOU HAVE BEEN SCAMMED AND SHOULD DEMAND YOUR MONEY BACK. VISIT https://hbc.hackmii.com/scam/ Press (1) to continue."
 ]; 
 
 function getCurrentTopic() {
