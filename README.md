@@ -1,12 +1,7 @@
 # MeowChat
 
-An instant messaging web platform.
+An experimental chatroom.
 
-## Features
-- Real-time chat using Socket.IO
-- Simple UI with HTML, CSS, and JavaScript
-- Node.js backend with Express
-- Messages stored in Neon PostgreSQL
 
 ## Getting Started
 
@@ -16,7 +11,7 @@ cd server
 npm install
 ```
 
-### 2. Set your Neon PostgreSQL connection string
+### 2. Set your PostgreSQL connection string
 Set the `DATABASE_URL` environment variable in your shell or `.env` file.
 
 ### 3. Start the server
