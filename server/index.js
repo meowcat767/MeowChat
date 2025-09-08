@@ -21,7 +21,8 @@ const topics = [
   "bash: npm: command not found",
   "[FILTERED]",
   "Fun fact: There are over 100 words in the filter database.",
-  "THIS SOFTWARE MUST NOT BE SOLD ALONE OR PART OF A BUNDLE. IF YOU PAID FOR THIS SOFTWARE OR RECIVED IT AS PART OF A BUNDLE FOLLOWING PAYMENT, YOU HAVE BEEN SCAMMED AND SHOULD DEMAND YOUR MONEY BACK. VISIT https://hbc.hackmii.com/scam/ Press (1) to continue."
+  "THIS SOFTWARE MUST NOT BE SOLD ALONE OR PART OF A BUNDLE. IF YOU PAID FOR THIS SOFTWARE OR RECIVED IT AS PART OF A BUNDLE FOLLOWING PAYMENT, YOU HAVE BEEN SCAMMED AND SHOULD DEMAND YOUR MONEY BACK. VISIT https://hbc.hackmii.com/scam/ Press (1) to continue.",
+  "There is a cat stuck in the ceiling. It's CEIL1NG_CAT",
 ]; 
 
 function getCurrentTopic() {
